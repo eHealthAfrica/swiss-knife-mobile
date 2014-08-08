@@ -1,0 +1,36 @@
+{
+  "name": "swiss-knife-mobile",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "~1.2.20",
+    "angular-bootstrap": "~0.11.0",
+    "font-awesome": "~4.1.0",
+    "angular-ui-router": "~0.2.10",
+    "bootstrap-css-only": "~3.1.0",
+    "angular-animate": "~1.2.20"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.20",
+    "jasmine-as-promised": "~0.0.8",
+    "es5-shim": "~3.4.0"
+  },
+  "homepage": "https://github.com/eHealthAfrica/swiss-knife-mobile",
+  "authors": [
+    "eHealth Africa <http://ehealthafrica.org>"
+  ],
+  "description": "Quick incidence report, driver movement tracker",
+  "main": "app/scripts/main.js",
+  "keywords": [
+    "chrome",
+    "ehealth",
+    "africa"
+  ],
+  "overrides": {
+    "angular": {
+      "main": [
+        "angular.js",
+        "angular-csp.css"
+      ]
+    }
+  }
+}

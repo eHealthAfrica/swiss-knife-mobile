@@ -1,0 +1,12 @@
+{
+  "api": {
+    "url": "http://54.76.223.106"
+  },
+  "analytics": {
+    "service": "LoMIS",
+    "propertyID": "UA-52016752-1",
+    "eventsLimit": 8192,
+    "exceptionsLimit": 1024,
+    "pagesLimit": 4096
+  }
+}

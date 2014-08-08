@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Drivers Log Page
+      </h3>
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+        <select ng-change="selectVehicle()" ng-model="selectedVehicle" class="form-control top-martin-10">
+          <option value="">Select Vehicle</option>
+          <option ng-repeat="(id, vehicle) in vehicleList" value="vehicle.id">
+            {{ vehicle.license}}
+          </option>
+        </select>
+      </div>
+      <div ng-if="selectedVehicle !== ''">
+        <button
+          class="btn btn-lg btn-block"
+          ng-click="buttonState = !buttonState"
+          ng-class="{'btn-success fa fa-play': !buttonState, 'btn-danger fa fa-stop active': buttonState}" >
+          <i class="fa-lg"></i>
+          <span ng-if="!buttonState">Start Logging</span>
+          <span ng-if="buttonState">Stop Logging</span>
+        </button>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

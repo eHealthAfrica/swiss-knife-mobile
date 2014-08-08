@@ -1,0 +1,12 @@
+node_modules
+dist
+.tmp
+.sass-cache
+app/bower_components
+.idea/
+npm-debug.log
+test/bower_components
+coverage
+app/scripts/config.js
+build
+nbproject/private/
