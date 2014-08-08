@@ -51,7 +51,7 @@
     "test": "grunt travis",
     "test-watch": "./node_modules/karma/bin/karma start --autoWatch true --singleRun false"
   },
-  "description": "User centered medical supply management",
+  "description": "Quick incidence report, driver movement tracker",
   "main": "Gruntfile.js",
   "directories": {
     "test": "test"
