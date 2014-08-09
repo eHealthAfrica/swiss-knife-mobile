@@ -13,14 +13,53 @@ angular.module('swissKnifeMobileApp')
         controller: 'DriversLogCtrl'
       })
   })
-  .controller('DriversLogCtrl', function ($scope, vehicleService) {
+  .controller('DriversLogCtrl', function ($scope, vehicleService, driversLogService, userService) {
+    var user = userService.getUser();
 
-    $scope.buttonState = false;
+    $scope.buttonState = undefined;
     $scope.selectedVehicle = '';
-    $scope.vehicleList = vehicleService.getVehicleList();
+
+    vehicleService.getVehicleList()
+      .then(function(vehicleList) {
+        $scope.vehicleList = vehicleList;
+      })
+      .catch(function(reason) {
+        console.log(reason);
+      });
+
     $scope.selectVehicle = function() {
       if ($scope.selectedVehicle === '') {
         $scope.buttonState = false;
       }
     };
+
+    var eventsID = {
+      start: 'http://54.220.157.69/rest/event-types/1/',
+      stop: 'http://54.220.157.69/rest/event-types/2/'
+    };
+
+    $scope.toggleButton = function() {
+      if($scope.buttonState === undefined || $scope.buttonState === false){
+        driversLogService.sendGeoData(eventsID.start, user.url, $scope.selectedVehicle.url)
+          .then(function(response) {
+            console.info(response);
+          })
+          .catch(function(reason) {
+            console.error(reason);
+          });
+        $scope.buttonState = true;
+      }
+      else{
+        driversLogService.sendGeoData(eventsID.stop, user.url, $scope.selectedVehicle.url)
+          .then(function(response) {
+            console.info(response);
+          })
+          .catch(function(reason) {
+            console.error(reason);
+          });
+        $scope.buttonState = false;
+      }
+    };
+
+
   });

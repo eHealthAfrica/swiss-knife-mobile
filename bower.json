@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "angular": "~1.2.20",
+    "angular-resource": "1.2.6",
     "angular-bootstrap": "~0.11.0",
     "font-awesome": "~4.1.0",
     "angular-ui-router": "~0.2.10",
@@ -18,7 +19,7 @@
   "authors": [
     "eHealth Africa <http://ehealthafrica.org>"
   ],
-  "description": "Quick incidence report, driver movement tracker",
+  "description": "Quick incidence-log report, driver movement tracker",
   "main": "app/scripts/main.js",
   "keywords": [
     "chrome",

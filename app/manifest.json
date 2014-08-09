@@ -1,6 +1,6 @@
 {
   "name": "Swiss Knife Mobile",
-  "description": "Quick incidence report, driver movement tracker",
+  "description": "Quick incidence-log report, driver movement tracker",
   "version": "0.0.1",
   "manifest_version": 2,
   "permissions": [
@@ -15,7 +15,7 @@
     "geolocation",
     "storage",
     "unlimitedStorage",
-    "http://54.76.223.106/*"
+    "http://54.220.157.69/*"
   ],
   "icons": {
     "16": "images/icon-16.png",

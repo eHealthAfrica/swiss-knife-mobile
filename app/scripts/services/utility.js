@@ -10,12 +10,17 @@
 angular.module('swissKnifeMobileApp')
   .service('utility', function utility() {
     // AngularJS will instantiate a singleton by calling "new" on this function
-    this.castArrayToObject = function(array, key){
+    this.castArrayToObject = function(array, key, callback){
       var newObject = {};
       key = angular.isUndefined(key) ? 'id' : key;
       if(angular.isArray(array)) {
         for (var i = 0; i < array.length; i++) {
-          newObject[array[i][key]] = array[i];
+          if (angular.isDefined(callback) && angular.isFunction(callback)){
+            key = callback(array[i]);
+            newObject[key] = array[i]
+          } else {
+            newObject[array[i][key]] = array[i];
+          }
         }
       }
       return newObject;

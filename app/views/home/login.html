@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel-heading">
+      <h1 class="panel-title">
+        Login Page
+      </h1>
+    </div>
+    <div class="panel-body">
+       <form novalidate>
+         <div class="form-group">
+           <label>Enter Phone</label>
+           <input class="form-control" type="text" ng-model="phone" ng-change="errMsg = false">
+         </div>
+         <div ng-if="errMsg" class="alert alert-danger">Invalid phone number or account does not exists</div>
+         <div>
+           <a
+             class="btn btn-default btn-lg btn-block"
+             ng-click="loginUserIn()">
+             <i class="fa fa-user"></i> Login
+           </a>
+         </div>
+       </form>
+    </div>
+  </div>
+</div>

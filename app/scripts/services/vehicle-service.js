@@ -8,24 +8,19 @@
  * Service in the swissKnifeMobileApp.
  */
 angular.module('swissKnifeMobileApp')
-  .service('vehicleService', function vehicleService(utility) {
+  .service('vehicleService', function vehicleService($q, utility, storageFactory) {
     // AngularJS will instantiate a singleton by calling "new" on this function
-    this.getVehicleList = function() {
-      var vehicleList = [
-        {
-          id: 1,
-          license: 'XA 1204 KJA'
-        },
-        {
-          id: 2,
-          license: 'XK 4404 AKD'
-        },
-        {
-          id: 3,
-          license: 'XV 1103 ZRA'
-        }
-      ];
-      return utility.castArrayToObject(vehicleList);
-    };
 
+    this.getVehicleList = function() {
+      var deferred = $q.defer();
+      storageFactory.all('vehicles')
+        .then(function(vehicleList) {
+          vehicleList = utility.castArrayToObject(vehicleList, 'url');
+          deferred.resolve(vehicleList);
+        })
+        .catch(function(reason) {
+          deferred.reject(reason);
+        });
+      return deferred.promise;
+    };
   });

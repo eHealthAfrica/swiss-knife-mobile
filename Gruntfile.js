@@ -380,18 +380,6 @@ module.exports = function(grunt) {
       }
     },
 
-    bump: {
-      options: {
-        files: [
-          'package.json',
-          'bower.json',
-          'app/manifest.json'
-        ],
-        commitFiles: '<%= bump.options.files %>',
-        pushTo: 'origin'
-      }
-    },
-
     wiredepCopy: {
       snapshot: {
         options: {
@@ -440,7 +428,6 @@ module.exports = function(grunt) {
       'clean:server',
       'wiredep',
       'ngconstant:development',
-
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -468,9 +455,38 @@ module.exports = function(grunt) {
   grunt.registerTask('build', function(target) {
     var common = [
       'clean:dist',
-      'chromeManifest:dist',
-      'fixtures'
+      'wiredep',
+      'chromeManifest:dist'
     ];
+
+    var release = [
+      'ngconstant:production',
+      'useminPrepare',
+      'concurrent:dist',
+      'autoprefixer',
+      'concat',
+      'removelogging',
+      'ngAnnotate',
+      'copy:dist',
+      'cssmin',
+      'uglify',
+      'rev',
+      'usemin',
+      'htmlmin'
+    ];
+
+    var snapshot = [
+      'ngconstant:development',
+      'autoprefixer',
+      'copy:snapshot',
+      'wiredepCopy:snapshot'
+    ];
+
+    if (target === 'release') {
+      grunt.task.run(common.concat(release));
+    } else {
+      grunt.task.run(common.concat(snapshot));
+    }
   });
 
   grunt.registerTask('default', [

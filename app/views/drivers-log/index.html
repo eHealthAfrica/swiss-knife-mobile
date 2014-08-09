@@ -7,26 +7,31 @@
     </div>
     <div class="panel-body">
       <div class="form-group">
-        <select ng-change="selectVehicle()" ng-model="selectedVehicle" class="form-control top-martin-10">
+        <select ng-change="selectVehicle()" ng-model="selectedVehicle" class="form-control">
           <option value="">Select Vehicle</option>
-          <option ng-repeat="(id, vehicle) in vehicleList" value="vehicle.id">
+          <option ng-repeat="(id, vehicle) in vehicleList" value="vehicle">
             {{ vehicle.license}}
           </option>
         </select>
       </div>
-      <div ng-if="selectedVehicle !== ''">
+      <div ng-if="selectedVehicle !== ''" >
         <button
           class="btn btn-lg btn-block"
-          ng-click="buttonState = !buttonState"
-          ng-class="{'btn-success fa fa-play': !buttonState, 'btn-danger fa fa-stop active': buttonState}" >
+          ng-class="{'btn-success fa fa-play': !buttonState, 'btn-danger fa fa-stop active': buttonState}"
+          ng-click="toggleButton()">
           <i class="fa-lg"></i>
           <span ng-if="!buttonState">Start Logging</span>
           <span ng-if="buttonState">Stop Logging</span>
         </button>
+
+        <div class="well well-sm top-martin-10">
+          <span ng-if="buttonState === true">
+            <span class="blink_text">Tracking has started ...</span>
+          </span>
+          <span ng-if="buttonState === false">Tracking has stopped</span>
+          <span ng-if="buttonState === null">Tracking not started</span>
+        </div>
       </div>
-
-
-
     </div>
   </div>
 </div>
