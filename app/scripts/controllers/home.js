@@ -24,12 +24,19 @@ angular.module('swissKnifeMobileApp')
         controller: 'LoginCtrl'
       });
   })
-  .controller('HomeCtrl', function ($scope, $state) {
+  .controller('HomeCtrl', function ($scope, $state ,growl, alertFactory) {
+
+    var alertQueue = alertFactory.getAll();
+    for (var i in alertQueue) {
+      var alert = alertQueue[i];
+      growl.success(alert.msg);
+      alertFactory.remove(alert.id);
+    }
     if (!$scope.userLoggedIn) {
       $state.go('login');
     }
   })
-  .controller('LoginCtrl', function($scope, userService, $state, $rootScope) {
+  .controller('LoginCtrl', function($scope, userService, $state, $rootScope, alertFactory, growl) {
     $scope.phone = '08093082558';
 
     $scope.loginUserIn = function() {
@@ -40,9 +47,10 @@ angular.module('swissKnifeMobileApp')
           .then(function(userDetails) {
             if(userDetails.length > 0){
               $rootScope.userLoggedIn = true;
+              alertFactory.success('you have successfully logged in');
               $state.go('home');
             } else{
-              $scope.errMsg = true;
+              growl.error('Invalid phone number or account does not exists');
             }
           })
           .catch(function(reason) {

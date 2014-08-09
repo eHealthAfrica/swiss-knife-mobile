@@ -20,7 +20,7 @@ angular.module('swissKnifeMobileApp')
         controller: 'IncidenceCtrl'
       })
   })
-  .controller('IncidenceCtrl', function ($scope, incidenceService, $state, userService) {
+  .controller('IncidenceCtrl', function ($scope, incidenceService, $state, userService, growl) {
     var user = userService.getUser();
 
     incidenceService.getEventTypeList()
@@ -32,12 +32,14 @@ angular.module('swissKnifeMobileApp')
       });
 
     $scope.sendEvent = function(eventID) {
+      growl.success('sending geo data and message');
       var eventCode = parseInt(eventID.code, 10);
       if ([0, 1].indexOf(eventCode) !== -1) {
         $state.go('drivers-log');
       } else {
         incidenceService.sendGeoData(eventID.url, user.url)
           .then(function(response) {
+            growl.success('data sent');
             console.log(response);
           })
           .catch(function(reason) {

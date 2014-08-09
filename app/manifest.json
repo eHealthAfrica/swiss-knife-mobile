@@ -15,7 +15,8 @@
     "geolocation",
     "storage",
     "unlimitedStorage",
-    "http://54.220.157.69/*"
+    "http://54.220.157.69/*",
+    "http://192.168.38.10/*"
   ],
   "icons": {
     "16": "images/icon-16.png",

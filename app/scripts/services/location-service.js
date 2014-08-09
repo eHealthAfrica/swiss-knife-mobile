@@ -55,6 +55,7 @@ angular.module('swissKnifeMobileApp')
       getCurrentPosition()
         .then(function (geoLocation) {
           var location = getMiniGeoPosition(geoLocation);
+
           if(angular.isObject(location)){
             var postData = {
               lat: parseFloat(location.latitude).toFixed(6),
@@ -70,8 +71,11 @@ angular.module('swissKnifeMobileApp')
                 deferred.resolve(response);
               })
               .catch(function(reason) {
+                alert(JSON.stringify(reason));
                 deferred.reject(reason);
               });
+          } else {
+            alert('location is not an object '+ location);
           }
         })
         .catch(function(reason) {

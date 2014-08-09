@@ -4,6 +4,7 @@ angular.module('swissKnifeMobileApp', [
     'ngResource',
     'ui.bootstrap',
     'ui.router',
+    'angular-growl',
     'config',
     'ngAnimate',
     'db'
@@ -24,4 +25,12 @@ angular.module('swissKnifeMobileApp', [
     if(angular.isUndefined(userService.getUser())){
       $rootScope.userLoggedIn = false;
     }
+  })
+  .config(function(growlProvider) {
+    growlProvider.globalTimeToLive({
+      success: 2000,
+      error: 5000,
+      warning: 2000,
+      info: 2000
+    });
   });
