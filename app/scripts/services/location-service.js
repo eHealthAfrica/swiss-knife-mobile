@@ -50,8 +50,9 @@ angular.module('swissKnifeMobileApp')
       };
     };
 
-    this.sendGeoData = function(eventID, driverID, vehicleID) {
+    this.sendGeoData = function(eventID, driverID, vehicleID, model) {
       var deferred = $q.defer();
+      model = angular.isDefined(model) ? model : 'events';
       getCurrentPosition()
         .then(function (geoLocation) {
           var location = getMiniGeoPosition(geoLocation);
@@ -66,12 +67,11 @@ angular.module('swissKnifeMobileApp')
               vehicle: vehicleID
             };
 
-            storageFactory.save('events', postData)
+            storageFactory.save(model, postData)
               .then(function(response) {
                 deferred.resolve(response);
               })
               .catch(function(reason) {
-                alert(JSON.stringify(reason));
                 deferred.reject(reason);
               });
           } else {

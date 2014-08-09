@@ -14,6 +14,15 @@ angular.module('swissKnifeMobileApp')
         templateUrl: 'views/home/index.html',
         controller: 'HomeCtrl'
       })
+      .state('user-profile', {
+        parent: 'root.index',
+        url: '/user-profile',
+        data: {
+          label: 'user Profile Page'
+        },
+        templateUrl: 'views/home/user-profile.html',
+        controller: 'UserProfileCtrl'
+      })
       .state('login', {
         parent: 'root.index',
         url: '/login',
@@ -35,6 +44,9 @@ angular.module('swissKnifeMobileApp')
     if (!$scope.userLoggedIn) {
       $state.go('login');
     }
+  })
+  .controller('UserProfileCtrl', function($scope, userService) {
+    $scope.userProfile = userService.getUser();
   })
   .controller('LoginCtrl', function($scope, userService, $state, $rootScope, alertFactory, growl) {
     $scope.phone = '08093082558';

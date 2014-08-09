@@ -9,7 +9,7 @@
       <div class="form-group">
         <select ng-change="selectVehicle()" ng-model="selectedVehicle" class="form-control">
           <option value="">Select Vehicle</option>
-          <option ng-repeat="(id, vehicle) in vehicleList" value="vehicle">
+          <option ng-repeat="(id, vehicle) in vehicleList" value="{{ vehicle }}">
             {{ vehicle.license}}
           </option>
         </select>
@@ -29,7 +29,7 @@
             <span class="blink_text">Tracking has started ...</span>
           </span>
           <span ng-if="buttonState === false">Tracking has stopped</span>
-          <span ng-if="buttonState === null">Tracking not started</span>
+          <span ng-if="buttonState === undefined">Tracking not started</span>
         </div>
       </div>
     </div>

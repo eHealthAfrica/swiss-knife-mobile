@@ -39,8 +39,20 @@ angular.module('swissKnifeMobileApp')
     };
 
     $scope.toggleButton = function() {
+      var selectedVehicle = JSON.parse($scope.selectedVehicle);
+      var sendInterval = setInterval(function() {
+        if ($scope.buttonState) {
+          driversLogService.sendGeoData(eventsID.start, user.url, selectedVehicle.url, 'vehicle-locations')
+            .then(function(response) {
+              console.info(response);
+            })
+            .catch(function(reason) {
+              console.error(reason);
+            });
+        }
+      }, 3000);
       if($scope.buttonState === undefined || $scope.buttonState === false){
-        driversLogService.sendGeoData(eventsID.start, user.url, $scope.selectedVehicle.url)
+        driversLogService.sendGeoData(eventsID.start, user.url, selectedVehicle.url)
           .then(function(response) {
             console.info(response);
           })
@@ -50,7 +62,8 @@ angular.module('swissKnifeMobileApp')
         $scope.buttonState = true;
       }
       else{
-        driversLogService.sendGeoData(eventsID.stop, user.url, $scope.selectedVehicle.url)
+        clearInterval(sendInterval);
+        driversLogService.sendGeoData(eventsID.stop, user.url, selectedVehicle.url)
           .then(function(response) {
             console.info(response);
           })
