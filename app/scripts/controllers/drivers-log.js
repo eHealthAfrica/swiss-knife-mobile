@@ -50,7 +50,7 @@ angular.module('swissKnifeMobileApp')
               console.error(reason);
             });
         }
-      }, 3000);
+      }, 10000);
       if($scope.buttonState === undefined || $scope.buttonState === false){
         driversLogService.sendGeoData(eventsID.start, user.url, selectedVehicle.url)
           .then(function(response) {
