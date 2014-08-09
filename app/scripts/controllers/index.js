@@ -18,6 +18,12 @@ angular.module('swissKnifeMobileApp')
               $scope.state = $state;
             }
           },
+          'footer': {
+            templateUrl: 'views/index/footer.html',
+            controller: function($scope, $state){
+              $scope.state = $state;
+            }
+          },
           'content': {}
         }
       });
